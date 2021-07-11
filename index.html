@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+          <th>Title</th>
+          <th>Value</th>
+        </tr>
+        
+        <tr>
+          <td>Bitcoin Current Price</td>
+          <td id='current-price'></td>
+        </tr>
+        
+    </table>
+
+    <script>
+      const Http = new XMLHttpRequest();
+      const url2 = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=bitcoin';
+      Http.open("GET", url2);
+      Http.send();
+
+      Http.onreadystatechange = (e) => {
+        // console.log(Http.responseText)
+        
+        console.log(JSON.parse(Http.responseText)[0]);
+        let bitObject =JSON.parse(Http.responseText)[0];
+        document.getElementById('current-price').innerHTML = bitObject.current_price;
+      }
+    </script>
+</body>
+</html>
